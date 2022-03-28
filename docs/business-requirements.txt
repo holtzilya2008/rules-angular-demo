@@ -1,0 +1,64 @@
+
+Roles:  Manager, Finance
+
+Order form fields: 
+
+    Order Type: 
+        One Time Payment
+        Subscription
+        Splitted
+    
+    Total Cost
+
+    Monthly Amount
+
+    Order Status
+    Draft - editing only
+    Final - Final stage before submit
+    Aprooved
+    Paid
+    Delivered
+    
+    Customer
+        Amazon (US)
+        CodeValue (IL)
+        SpaceX (Mars)
+
+    Tax
+
+    Payment Method
+        Card,
+        Cash,
+        Paypal
+
+    Text summary
+
+Order form visibility requirements; 
+
+    * OrderType is visible when: 
+        All statuses only for Manager in all statuses except delivered
+        on status delivered it appar in text summary only
+
+    * Order status control is visible when: 
+        statuses : Draft, Final, 
+        on other statuses appears in the text summary only
+
+    * Customer is visible when: 
+        statuses : Draft, Final, Aprooved
+        after that visible only in the text summary
+
+    * Total Cost is visible when: 
+        statuses : Draft, Final, Aprooved
+        AND when type is Splitted
+    
+    * Monthly is visible when: 
+        statuses : Draft, Final, Aprooved
+        AND when type is Splitted OR Subscription
+
+    * Tax is a text field and visible only for customers which has Tax Info
+        when status is Paid or Delivered 
+
+    * Payment method is vidible only for Aprooved state
+        and never shown in Summary 
+
+    * Text summary is always visible
