@@ -1,1 +1,17 @@
-<p>order-form works!</p>
+<form nz-form [formGroup]="orderForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="totalCost">E-mail</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select ngModel="lucy" nzAllowClear nzPlaceHolder="Choose">
+        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="totalCost">E-mail</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="totalCost" id="totalCost" />
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

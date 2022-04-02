@@ -4,8 +4,8 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { IsOrderFieldVisiblePipe } from './pipes/is-order-field-visible.pipe';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
-
-
+import { VendorModule } from 'src/app/common/vendor.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,9 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     OrderFormComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    VendorModule
   ],
   exports: [
     OrderDetailsComponent
