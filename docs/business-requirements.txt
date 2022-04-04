@@ -35,17 +35,19 @@ Order form fields:
 
 Order form visibility requirements; 
 
+    * ID will be visible only for status Paid and Delivered
+
+    * Product 
+      - is visible on all statuses
+
     * OrderType is visible when: 
-        All statuses only for Manager in all statuses except delivered
-        on status delivered it appar in text summary only
+      - All statuses only for Manager in all statuses except delivered
 
     * Order status control is visible when: 
-        statuses : Draft, Final, 
-        on other statuses appears in the text summary only
+      - All statuses, All types
 
     * Customer is visible when: 
-        statuses : Draft, Final, Aprooved
-        after that visible only in the text summary
+      - statuses : Draft, Final, Aprooved
 
     * Total Cost is visible when: 
         statuses : Draft, Final, Aprooved
@@ -59,6 +61,4 @@ Order form visibility requirements;
         when status is Paid or Delivered 
 
     * Payment method is vidible only for Aprooved state
-        and never shown in Summary 
-
-    * Text summary is always visible
+    
