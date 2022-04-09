@@ -1,17 +1,46 @@
-<!-- <form nz-form [formGroup]="orderForm">
+<form class="mt-10" nz-form [formGroup]="orderForm">
+
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="totalCost">E-mail</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-select ngModel="lucy" nzAllowClear nzPlaceHolder="Choose">
-        <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="orderStatus">Order Status</nz-form-label>
+    <nz-form-control formControlName="status" [nzSm]="14" [nzXs]="24">
+      <nz-select nzAllowClear nzPlaceHolder="Select status">
+        <nz-option *ngFor="let o of dropdowns.statuses" [nzValue]="o" [nzLabel]="o"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="totalCost">E-mail</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="totalCost" id="totalCost" />
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Order Type</nz-form-label>
+    <nz-form-control formControlName="type" [nzSm]="14" [nzXs]="24">
+      <nz-select nzAllowClear nzPlaceHolder="Select Order Type">
+        <nz-option *ngFor="let o of dropdowns.types" [nzValue]="o" [nzLabel]="o"></nz-option>
+      </nz-select>
     </nz-form-control>
   </nz-form-item>
 
-</form> -->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="monthlyAmount">Monthly Amount</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="monthlyAmount" id="monthlyAmount" type="number"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="totalCost">Total Cost</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="totalCost" id="totalCost" type="number"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="paymentMethod">Order Status</nz-form-label>
+    <nz-form-control formControlName="paymentMethod" [nzSm]="14" [nzXs]="24">
+      <nz-select nzAllowClear nzPlaceHolder="Select Payment method">
+        <nz-option *ngFor="let o of dropdowns.paymentMethods" [nzValue]="o" [nzLabel]="o"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+
+
+</form>
