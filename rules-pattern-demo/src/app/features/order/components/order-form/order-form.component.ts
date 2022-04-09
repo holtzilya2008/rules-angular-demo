@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subject, take, takeUntil } from 'rxjs';
+import { DropdownService } from 'src/app/api/services/dropdown.service';
 import { OrderDetailsDropdowns } from '../../constants';
 import { OrderStateService } from '../../services/order-state/order-state.service';
 import { OrderState } from '../../types';
+
 
 @Component({
   selector: 'app-order-form',
@@ -17,15 +19,17 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   private cleanup$ = new Subject<boolean>();
   orderForm!: FormGroup;
   orderState$!: Observable<OrderState>;
-  dropdowns = OrderDetailsDropdowns;
-
+  dropdowns: any = { ...OrderDetailsDropdowns };
 
   constructor(private readonly fb: FormBuilder,
+              private readonly dropdownService: DropdownService,
               private readonly stateService: OrderStateService) { }
 
   ngOnInit(): void {
     this.orderState$ = this.stateService.initState(this.orderId);
     this.initForm();
+    this.dropdowns.customers = this.dropdownService.getCustomers();
+    this.dropdowns.products = this.dropdownService.getProducts();
   }
 
   private initForm(): void {

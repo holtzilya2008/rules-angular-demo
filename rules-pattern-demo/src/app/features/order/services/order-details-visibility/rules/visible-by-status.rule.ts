@@ -3,10 +3,6 @@ import { OrderField, OrderStatus } from "../../../types";
 import { OrderVisibilityContext } from "../types";
 import { flatten, uniq } from 'lodash';
 
-declare type StatusToFieldsMap {
-  [key: OrderStatus]: OrderField[];
-}
-
 const visibleFieldsByStatusMap = {
   [OrderStatus.Draft]: ['type', 'totalCost', 'monthlyAmount'],
   [OrderStatus.Final]: ['type', 'totalCost', 'monthlyAmount'],

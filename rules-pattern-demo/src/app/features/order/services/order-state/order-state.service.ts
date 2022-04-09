@@ -23,14 +23,14 @@ export class OrderStateService {
   }
 
   getState(): Observable<OrderState> {
-    if (this.isInitialized) {
+    if (!this.isInitialized) {
       throw new Error(`Order state is not initialized!`);
     }
     return this.orderState.asObservable();
   }
 
   patchState(order: Partial<Order>): void {
-    if (this.isInitialized) {
+    if (!this.isInitialized) {
       throw new Error(`Order state is not initialized!`);
     }
     const currentState = this.orderState.value;
@@ -42,7 +42,7 @@ export class OrderStateService {
   private getOrderFromApi(id: string): Observable<Order> {
     const mock = OrdersMock;
     const order = mock.find(o => o.id === id) as Order;
-    return timer(200).pipe(
+    return timer(3000).pipe(
       map(() => order)
     );
   }

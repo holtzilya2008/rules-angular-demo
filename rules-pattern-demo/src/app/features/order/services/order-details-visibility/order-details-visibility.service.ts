@@ -21,7 +21,9 @@ export class OrderDetailsVisibilityService {
       orderState: state,
       fieldName
     }
-    return this.engine.aggregateAllBoolean(this.rules, context);
+    const result = this.engine.aggregateAllBoolean(this.rules, context);
+    console.log(`isFieldVisible(${fieldName}) ${result}`);
+    return result;
   }
 
 }

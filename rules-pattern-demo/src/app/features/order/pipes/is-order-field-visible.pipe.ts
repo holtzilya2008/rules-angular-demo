@@ -1,12 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { OrderDetailsVisibilityService } from '../services/order-details-visibility';
+import { OrderState } from '../types';
 
 @Pipe({
   name: 'isOrderFieldVisible'
 })
 export class IsOrderFieldVisiblePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+
+  constructor(private readonly visibilityService: OrderDetailsVisibilityService) {
+
+  }
+
+  transform(fieldName: string, state: OrderState): boolean {
+    return this.visibilityService.isFieldVisible(fieldName, state);
   }
 
 }
