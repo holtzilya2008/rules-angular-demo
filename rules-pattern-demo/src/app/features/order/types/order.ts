@@ -4,12 +4,12 @@ import { PaymentMethod } from "./enums/payment-method.enum";
 
 export interface Order {
   id: string;
-  productId: number;
+  productId: string;
   type: OrderType;
   totalCost?: number;
   monthlyAmount?: number;
   status: OrderStatus;
-  customerId: number;
+  customerId: string;
   tax?: number;
   paymentMethod?: PaymentMethod;
 }
