@@ -1,9 +1,11 @@
 import { Rule } from "../interfaces/rule";
 
-export class AllRuleEngine<TContext> {
+class AllRuleEngine<TContext, TResult> {
 
-  isApplicable(rules: Rule<TContext>[], context: TContext): boolean {
-    return rules.every(r => r.isApplicable(context));
+  aggregateAllBoolean(rules: Rule<TContext, boolean>[], context: TContext): boolean {
+    return rules.every(rule => !rule.isApplicable(context) || rule.execute(context));
   }
-
 }
+
+const allRuleEngine = new AllRuleEngine();
+export { allRuleEngine };

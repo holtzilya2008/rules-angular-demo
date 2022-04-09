@@ -1,31 +1,34 @@
 import { Rule } from "src/app/core/rule-engine";
 import { OrderField, OrderStatus } from "../../../types";
 import { OrderVisibilityContext } from "../types";
+import { flatten, uniq } from 'lodash';
 
 declare type StatusToFieldsMap {
   [key: OrderStatus]: OrderField[];
 }
 
-class VisibleByStatusRule implements Rule<OrderVisibilityContext> {
+const visibleFieldsByStatusMap = {
+  [OrderStatus.Draft]: ['type', 'totalCost', 'monthlyAmount'],
+  [OrderStatus.Final]: ['type', 'totalCost', 'monthlyAmount'],
+  [OrderStatus.Aprooved]: ['paymentMethod'],
+  [OrderStatus.Paid]: ['id'],
+  [OrderStatus.Delivered]: ['id'],
+}
 
-  private alwaysVisible: OrderField[] = ['productId', 'status', 'customerId'];
+export class VisibleByStatusRule implements Rule<OrderVisibilityContext, boolean> {
 
-  private visibleFieldsByStatusMap = {
-    [OrderStatus.Draft]: [...this.alwaysVisible, 'type', 'totalCost', 'monthlyAmount'],
-    [OrderStatus.Final]: [...this.alwaysVisible, 'type', 'totalCost', 'monthlyAmount'],
-    [OrderStatus.Aprooved]: [...this.alwaysVisible, 'paymentMethod'],
-    [OrderStatus.Paid]: [...this.alwaysVisible, 'id'],
-    [OrderStatus.Delivered]: [...this.alwaysVisible, 'id'],
-  }
+  private applicableForFields: string[] = uniq(
+    flatten(Object.values(visibleFieldsByStatusMap))
+  );
 
   isApplicable(context: OrderVisibilityContext): boolean {
+    return this.applicableForFields.includes(context.fieldName);
+  }
+
+  execute(context: OrderVisibilityContext): boolean {
     const status = context.orderState.order.status;
-    const fieldName = context.fieldName;
-    return (this.visibleFieldsByStatusMap[status]).includes(fieldName);
+    return visibleFieldsByStatusMap[status] && visibleFieldsByStatusMap[status].includes(context.fieldName);
   }
 
 }
-
-const visibleByStatusRule = new VisibleByStatusRule();
-export { visibleByStatusRule };
 

@@ -1,6 +1,6 @@
-export interface Rule<TContext> {
+export interface Rule<TContext, TResult> {
 
   isApplicable(context: TContext): boolean;
-  execute?<TResult>(context: TContext): TResult;
+  execute(context: TContext): TResult;
 
 }
