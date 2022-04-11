@@ -2,6 +2,13 @@
 
   <form class="mt-10" nz-form [formGroup]="orderForm">
 
+    <nz-form-item  *ngIf="'id' | isOrderFieldVisible: state">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">Paid Order ID</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <span>{{state.order.id}}</span>
+      </nz-form-control>
+    </nz-form-item>
+
     <nz-form-item *ngIf="'status' | isOrderFieldVisible: state">
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="orderStatus">Order Status</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">

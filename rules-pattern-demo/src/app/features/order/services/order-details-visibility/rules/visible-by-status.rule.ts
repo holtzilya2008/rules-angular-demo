@@ -6,7 +6,7 @@ import { flatten, uniq } from 'lodash';
 const visibleFieldsByStatusMap = {
   [OrderStatus.Draft]: ['type', 'totalCost', 'monthlyAmount'],
   [OrderStatus.Final]: ['type', 'totalCost', 'monthlyAmount'],
-  [OrderStatus.Aprooved]: ['paymentMethod'],
+  [OrderStatus.Aprooved]: ['paymentMethod', 'tax'],
   [OrderStatus.Paid]: ['id'],
   [OrderStatus.Delivered]: ['id'],
 }
