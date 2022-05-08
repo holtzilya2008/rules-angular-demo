@@ -1,5 +1,5 @@
 export enum OrderType {
   OTP = 'One Time Payment',
   Subscription = 'Subscription',
-  Splitted = 'Splittedd'
+  Splitted = 'Splitted'
 }

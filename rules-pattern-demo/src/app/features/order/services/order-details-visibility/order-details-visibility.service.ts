@@ -4,26 +4,35 @@ import { rulesFactory } from './rules';
 import { OrderVisibilityContext } from './types';
 import { allRuleEngine } from 'src/app/core/rule-engine';
 import { OrderState } from '../../types';
+import { DropdownService } from 'src/app/api/services/dropdown.service';
+import { orderBy } from 'lodash';
+import { Customer } from 'src/app/api/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderDetailsVisibilityService {
-
-  private rules: Rule<OrderVisibilityContext, boolean>[] = rulesFactory.getRules();
+  private rules: Rule<OrderVisibilityContext, boolean>[] =
+    rulesFactory.getRules();
   private engine = allRuleEngine;
 
-  constructor() {
-  }
+  constructor(private readonly dropdownService: DropdownService) {}
 
   isFieldVisible(fieldName: string, state: OrderState) {
+    const customer = this.getCustomer(state);
     const context: OrderVisibilityContext = {
       orderState: state,
-      fieldName
-    }
+      customerInfo: { taxRequired: customer?.taxRequired } ,
+      fieldName,
+    };
     const result = this.engine.aggregateAllBoolean(this.rules, context);
-    console.log(`isFieldVisible(${fieldName}) ${result}`);
     return result;
   }
 
+  private getCustomer(state: OrderState): Customer | null {
+    if (!state || !state.order) {
+      return null;
+    }
+    return this.dropdownService.getCustomerById(state.order.customerId);
+  }
 }

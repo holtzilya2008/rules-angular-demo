@@ -1,5 +1,5 @@
 import { Rule } from "src/app/core/rule-engine";
-import { OrderField, OrderStatus } from "../../../types";
+import { OrderStatus } from "../../../types";
 import { OrderVisibilityContext } from "../types";
 import { flatten, uniq } from 'lodash';
 
